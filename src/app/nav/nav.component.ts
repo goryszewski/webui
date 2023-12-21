@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
+  display = false;
+  sitename = "WEB ui REGISTRY"
+  onClick(value: boolean) {
+    console.log("NAV:001: click:" + value);
+    this.display = value;
 
+  }
 }
