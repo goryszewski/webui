@@ -1,5 +1,8 @@
 <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Image</span>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
-        (input)="changeSearchValue($event)">
+    <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
+        (input)="changeSearchValue($event)"> -->
+    <input type="text" [(ngModel)]="searchValue" (input)="changeSearchValue($event)">
+    <span *ngIf="searchValue != ''"> {{searchValue}}</span>
+
 </div>
