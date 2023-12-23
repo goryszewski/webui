@@ -3,5 +3,6 @@
     <app-header></app-header>
     <app-notification></app-notification>
     <app-search></app-search>
-    <app-products></app-products>
+    <app-products [total]="test" (testEmiter)="testemitF($event)"></app-products>
+    test: {{ testemit }}
 </div>

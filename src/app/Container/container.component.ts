@@ -5,6 +5,10 @@ import { Component } from "@angular/core";
     templateUrl: './container.component.html',
     styleUrl: './container.component.css'
 })
-export class ContainerComponent{
-    test='My first componennt'
+export class ContainerComponent {
+    test: number = 122;
+    testemit: string = ""
+    testemitF(data: string) {
+        this.testemit = data
+    }
 }
