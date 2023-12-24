@@ -7,8 +7,8 @@ import { Component } from "@angular/core";
 })
 export class ContainerComponent {
     test: number = 122;
-    testemit: string = ""
-    testemitF(data: string) {
+    testemit: number = 0
+    testemitF(data: number) {
         this.testemit = data
     }
 }

@@ -9,15 +9,16 @@ export class ProductsComponent {
   @Input('total') all: number = 0
 
   @Output()
-  testEmiter: EventEmitter<string> = new EventEmitter<string>()
+  testEmiter: EventEmitter<number> = new EventEmitter<number>()
 
   products = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9]
   add() {
     this.products.push(1)
   }
+  testid: number = 0
 
-  emitfunction() {
+  emitfunction(id: number) {
     console.log("test emit")
-    this.testEmiter.emit('test payload')
+    this.testEmiter.emit(id)
   }
 }

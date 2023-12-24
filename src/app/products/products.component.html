@@ -1,5 +1,5 @@
 <div>
-    <button type="button" class="btn btn-primary" (click)="emitfunction()">{{all}}</button>
+    <button type="button" class="btn btn-primary" (click)="emitfunction(testid)">{{testid}}</button>
     <table class="table">
         <thead>
             <tr>
@@ -15,7 +15,7 @@
                 <td>{{item}}</td>
                 <td [ngStyle]="{color: item === 1 ? 'red' : 'green' }">Otto</td>
                 <td>
-                    <div *ngIf="item!=1 ; else ttttt">DELETE</div>
+                    <div *ngIf="item!=1 ; else ttttt"><button (click)="testid = i"> DELETE</button></div>
                     <ng-template #ttttt>
                         <div>Update</div>
                     </ng-template>
