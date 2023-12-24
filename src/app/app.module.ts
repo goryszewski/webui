@@ -14,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { ProductsComponent } from './products/products.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSlideToggleModule, FormsModule
+    MatSlideToggleModule, FormsModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
