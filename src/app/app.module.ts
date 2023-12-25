@@ -16,11 +16,13 @@ import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReposComponent } from './repos/repos.component';
+import { HomeComponent } from './home/home.component';
+import { ErrComponent } from './err/err.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, ContainerComponent, NavComponent, HeaderComponent, NotificationComponent, SearchComponent, ProductsComponent, ReposComponent
+    AppComponent, ContainerComponent, NavComponent, HeaderComponent, NotificationComponent, SearchComponent, ProductsComponent, ReposComponent, HomeComponent, ErrComponent
   ],
   imports: [
     BrowserModule,
