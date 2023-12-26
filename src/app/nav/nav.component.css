@@ -2,16 +2,27 @@
     display: flex;
     background-color: wheat;
 }
-.site-name{
+
+.site-name {
     padding: 5px 30px;
     color: black;
 }
-.site-menu{
+
+.site-menu {
     padding: 10px 30px;
     margin-left: 100px;
 }
-a{
+
+a {
     text-decoration: none;
     color: blue;
     margin: 0px 10px;
+}
+
+.active {
+    background-color: brown;
+}
+
+.class2 {
+    color: aliceblue;
 }

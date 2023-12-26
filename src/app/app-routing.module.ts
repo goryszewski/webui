@@ -5,8 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { ErrComponent } from './err/err.component';
 
 const routes: Routes = [
-  // { path: "", component: HomeComponent },
-  { path: "", redirectTo: "Home", pathMatch: 'full' },
+  { path: "", component: HomeComponent },
+  // { path: "", redirectTo: "Home", pathMatch: 'full' },
   { path: 'Images', component: ReposComponent },
   { path: 'Home', component: HomeComponent },
   { path: '**', component: ErrComponent }

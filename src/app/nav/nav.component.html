@@ -3,8 +3,9 @@
         <h2>{{ sitename }}</h2>
     </div>
     <div class="site-menu">
-        <a href="/Home">Home</a>
-        <a href="/Images" (click)="onClick(false)">REPO</a>
+        <a [routerLinkActive]="['active','class2']" routerLink="" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a [routerLinkActive]="'active'" [routerLink]="['Api',10]">APIPY</a>
+        <a [routerLinkActive]="'active'" [routerLink]="'Images'" (click)="onClick(false)">REPO</a>
         <!-- <div [hidden]="display" (click)="onClick(true)"> ELO</div> -->
 
     </div>

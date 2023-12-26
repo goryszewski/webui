@@ -30,6 +30,7 @@ export class ReposComponent implements OnInit {
     this.http.get(this.url + "/v2/_catalog").subscribe((res) => {
       this.images = res['repositories']
     })
+    // https://www.baeldung.com/ops/docker-registry-api-list-images-tags
   }
   limitvalue(event: string) {
     this.limit = event
