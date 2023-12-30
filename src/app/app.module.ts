@@ -18,11 +18,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReposComponent } from './repos/repos.component';
 import { HomeComponent } from './home/home.component';
 import { ErrComponent } from './err/err.component';
+import { HighlightDirective } from './customDirective/highlight.directive';
+import { HoverDirective } from './customDirective/hover.directive';
+import { BetterhlDirective } from './customDirective/betterhl.directive';
 
 
 @NgModule({
   declarations: [
-    AppComponent, ContainerComponent, NavComponent, HeaderComponent, NotificationComponent, SearchComponent, ProductsComponent, ReposComponent, HomeComponent, ErrComponent
+    AppComponent, ContainerComponent, NavComponent, HeaderComponent, NotificationComponent, SearchComponent, ProductsComponent, ReposComponent, HomeComponent, ErrComponent, HighlightDirective, HoverDirective, BetterhlDirective
   ],
   imports: [
     BrowserModule,
