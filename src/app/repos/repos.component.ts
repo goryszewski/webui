@@ -3,8 +3,29 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-repos',
-  templateUrl: './repos.component.html',
-  styleUrl: './repos.component.css'
+  template:`
+    <div>
+      <hr>
+      <app-search (searchEmit)="limitvalue($event)"></app-search>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col" appBetterhl appHighlight>First</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of returnImages() ; let i = index">
+                  <td appHighlight>
+                      {{i}}
+                  </td>
+                  <td appHover>{{item}}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  `,
+  styles:[".c {padding: 10px;color: green}"]
 })
 export class ReposComponent implements OnInit {
 

@@ -3,8 +3,13 @@ import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <div>
+      {{ title }}
+      <app-container></app-container>
+    </div>
+  `,
+  styles:[]
 })
 export class AppComponent {
   link = environment.link;

@@ -2,8 +2,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  template: `
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Image</span>
+      <input type="text" (input)="changeSearchValue($event)">
+    </div>
+  `,
+  styles:[]
 })
 export class SearchComponent {
 

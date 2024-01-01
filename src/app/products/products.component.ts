@@ -3,8 +3,36 @@ import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators'
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  template: `
+    <div>
+      <button type="button" class="btn btn-primary" (click)="emitfunction(testid)">{{testid}}</button>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of images ; let i = index">
+                  <td>{{i}}</td>
+                  <td>{{item}}</td>
+                  <td [ngStyle]="{color: item === 1 ? 'red' : 'green' }">Otto</td>
+                  <td>
+                      <div *ngIf="item!=1 ; else ttttt"><button (click)="testid = i"> DELETE</button></div>
+                      <ng-template #ttttt>
+                          <div>Update</div>
+                      </ng-template>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  `,
+  styles: []
+
 })
 export class ProductsComponent implements OnInit {
   @Input('total') all: number = 0
