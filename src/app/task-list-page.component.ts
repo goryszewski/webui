@@ -1,27 +1,10 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TasksListComponent } from './tasks-list.component';
 import { SubmitTextComponent } from './submit-text.component';
 import { Task } from './Task';
-
-type ListFetchingError = { status: number; message: string };
-
-type IdleState = {
-  state: 'idle';
-};
-type LoadingState = {
-  state: 'loading';
-};
-type SuccessState = {
-  state: 'success';
-  results: Task[];
-};
-type ErrorState = {
-  state: 'error';
-  error: ListFetchingError;
-};
-
-type ComponentListState = IdleState | LoadingState | SuccessState | ErrorState;
+import { TasksService } from './tasks.service';
+import { ComponentListState } from './list-state.type';
 
 @Component({
   selector: 'app-task-list-page',
@@ -48,60 +31,34 @@ type ComponentListState = IdleState | LoadingState | SuccessState | ErrorState;
     `,
   ],
 })
-export class TaskListPageComponent {
-  listState: ComponentListState = { state: 'idle' };
+export class TaskListPageComponent implements OnInit {
+  listState: ComponentListState<Task> = { state: 'idle' };
 
-  private readonly URL = 'http://localhost:3000';
+  // tasksService = inject(TasksService);
 
-  constructor() {
+  constructor(private tasksService: TasksService) {}
+
+  ngOnInit() {
     this.listState.state = 'loading';
-    fetch(`${this.URL}/tasks`)
-      .then<Task[] | ListFetchingError>((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return { status: response.status, message: response.statusText };
-      })
-      .then((response) => {
-        setTimeout(() => {
-          if (Array.isArray(response)) {
-            this.listState = { state: 'success', results: response };
-          } else {
-            this.listState = { state: 'error', error: response };
-          }
-        }, 2000);
-      });
+    this.tasksService.getAll().then((response) => {
+      if (Array.isArray(response)) {
+        this.listState = { state: 'success', results: response };
+      } else {
+        this.listState = { state: 'error', error: response };
+      }
+    });
   }
 
   addTask(name: string, tasks: Task[]) {
-    let option = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        createdAt: new Date().getTime(),
-        name,
-        done: false,
-      } as Task),
-    };
-
-    fetch(`${this.URL}/tasks`, option)
-      .then<Task | Error>((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return new Error('Cant add task');
-      })
-      .then((response) => {
-        if ('id' in response) {
-          this.listState = {
-            state: 'success',
-            results: tasks.concat(response),
-          };
-        } else {
-          alert(response.message);
-        }
-      });
+    this.tasksService.add(name).then((response) => {
+      if ('id' in response) {
+        this.listState = {
+          state: 'success',
+          results: tasks.concat(response),
+        };
+      } else {
+        alert(response.message);
+      }
+    });
   }
 }
