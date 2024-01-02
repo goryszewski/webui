@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
-import { environment } from '../environments/environment';
+import { Component, ElementRef } from '@angular/core';
+import { TaskListPageComponent } from './task-list-page.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [TaskListPageComponent],
   template: `
-    <div>
-      {{ title }}
-      <app-container></app-container>
-    </div>
+    <h1 class="text-orange-500 uppercase py-4 text-2xl text-center">todolist</h1>
+    <main class="grid place-items-center pt-4">
+      <app-task-list-page />
+    </main>
   `,
-  styles:[]
+  styles: [],
 })
-export class AppComponent {
-  link = environment.link;
-  title = environment.title;
-}
+export class AppComponent {}
