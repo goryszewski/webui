@@ -1,12 +1,14 @@
 import { NgFor, NgIf } from '@angular/common';
-
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { featherCalendar } from '@ng-icons/feather-icons';
 import { Component, Input } from '@angular/core';
-import { Task } from './Task';
+import { Task } from '../model/Task';
 
 @Component({
   selector: 'app-tasks-list',
   standalone: true,
-  imports: [NgFor, NgIf],
+  viewProviders: [provideIcons({ featherCalendar })],
+  imports: [NgFor, NgIf, NgIconComponent],
   template: `
     <ul>
       <li *ngFor="let task of tasks" class="mb-2">
@@ -21,7 +23,9 @@ import { Task } from './Task';
                 </span>
               </ng-template>
             </section>
-            <footer class=" pt-2 flex items-center justify-end"></footer>
+            <footer class=" pt-2 flex items-center justify-end">
+              <ng-icon name="featherCalendar" class="text-sm" />
+            </footer>
           </button>
         </div>
       </li>

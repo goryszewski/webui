@@ -1,10 +1,10 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { TasksListComponent } from './tasks-list.component';
-import { SubmitTextComponent } from './submit-text.component';
-import { Task } from './Task';
-import { TasksService } from './tasks.service';
-import { ComponentListState } from './list-state.type';
+import { TasksListComponent } from './ui/tasks-list.component';
+import { SubmitTextComponent } from '@ui/submit-text.component';
+import { Task } from './model/Task';
+import { TasksService } from './data-access/tasks.service';
+import { ComponentListState } from '../utils/list-state.type';
 
 @Component({
   selector: 'app-task-list-page',
