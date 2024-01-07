@@ -2,13 +2,13 @@
   "tasks": [
     {
       "id": 1,
-      "name": "cos tam",
+      "name": "cos tamtrt\n",
       "done": false,
       "createdAt": 1704204089050
     },
     {
       "id": 2,
-      "name": "gdzies tam",
+      "name": "gdzies tam7\n",
       "done": true,
       "createdAt": 1704204089050
     },
@@ -23,30 +23,6 @@
       "name": "123",
       "done": false,
       "id": 4
-    },
-    {
-      "createdAt": 1704204713296,
-      "name": "1231232",
-      "done": false,
-      "id": 5
-    },
-    {
-      "createdAt": 1704227726102,
-      "name": "111",
-      "done": false,
-      "id": 6
-    },
-    {
-      "createdAt": 1704229055420,
-      "name": "22",
-      "done": false,
-      "id": 7
-    },
-    {
-      "createdAt": 1704316935218,
-      "name": "s",
-      "done": false,
-      "id": 8
     }
   ]
 }

@@ -4,6 +4,8 @@ import { ListFetchingError } from '../../utils/list-state.type';
 
 import { wait } from '../../utils/wait';
 
+export type TaskUpdatePayload = { done?: boolean; name?: string };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,6 +18,31 @@ export class TasksService {
         return response.json();
       }
       return { status: response.status, message: response.statusText };
+    });
+  }
+  async del(taskId: number) {
+    return fetch(`${this.URL}/tasks/${taskId}`, {
+      method: 'DELETE',
+    }).then<Error | undefined>((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      return new Error('Cant delete task');
+    });
+  }
+  async update(taskId: number, payload: TaskUpdatePayload) {
+    return fetch(`${this.URL}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then<Task | Error>((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return new Error('Cant update task');
     });
   }
   async add(name: string) {

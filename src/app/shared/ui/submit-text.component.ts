@@ -22,5 +22,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styles: ``,
 })
 export class SubmitTextComponent {
+  // INPUT OUTPUT
   @Output() submitText = new EventEmitter<string>();
+
+  // variable
+  // methods
 }

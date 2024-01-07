@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../model/Task';
 import { NgIconComponent } from '@ng-icons/core';
 import { RemoveItemButtonComponent } from '../../shared/ui/remove-item-button.component';
 import { AutosizeTextareaComponent } from '../../shared/ui/autosize-textarea.component';
 import { NgIf } from '@angular/common';
+import { TaskUpdatePayload } from '../data-access/tasks.service';
 @Component({
   selector: 'app-task-card',
   standalone: true,
@@ -40,22 +41,34 @@ import { NgIf } from '@angular/common';
   imports: [NgIf, NgIconComponent, RemoveItemButtonComponent, AutosizeTextareaComponent],
 })
 export class TaskCardComponent {
+  // INPUT OUTPUT
+  @Input({ required: true }) task!: Task;
+  @Output() update = new EventEmitter<TaskUpdatePayload>();
+  @Output() delete = new EventEmitter<void>();
+
+  // variable
+  isSingleClick = true;
+  editMode: boolean = false;
+
+  // methods
+
   switchToEditMode() {
     this.isSingleClick = false;
     this.editMode = true;
   }
+
   handleSingleClick() {
     console.log('002');
     this.isSingleClick = true;
   }
-  updateTaskName($event: string) {
+
+  updateTaskName(updateName: string) {
+    this.update.emit({ name: updateName });
     this.editMode = false;
   }
-  isSingleClick = true;
-  editMode: boolean = false;
-  @Input({ required: true }) task!: Task;
 
   remove(task: Task) {
+    this.delete.emit();
     console.log('Delete Task Id:', task.id);
   }
 }
