@@ -68,9 +68,7 @@ export class TaskListPageComponent {
   listState: ComponentListState<Task> = { state: LIST_STATE_VALUE.IDLE };
   listStateValue = LIST_STATE_VALUE;
 
-  ngOnInit() {
-    // this.getAllTasks(getAllTasksSearchParams(this.form.getRawValue()));
-  }
+  ngOnInit() {}
 
   handleFiltersChange(filters: TasksListFiltersFormValue): void {
     this.getAllTasks(getAllTasksSearchParams(filters));
@@ -79,31 +77,37 @@ export class TaskListPageComponent {
   getAllTasks(searchParams: GetAllTasksSearchParams): void {
     this.listState = { state: LIST_STATE_VALUE.LOADING };
 
-    this.tasksService.getAll(searchParams).then((response) => {
-      if (Array.isArray(response)) {
+    this.tasksService.getAll(searchParams).subscribe({
+      next: (response) => {
+        console.log(response);
         this.listState = {
           state: LIST_STATE_VALUE.SUCCESS,
-          results: response,
+          results: response.body!,
         };
-      } else {
+      },
+      error: (err) => {
         this.listState = {
           state: LIST_STATE_VALUE.ERROR,
-          error: response,
+          error: err,
         };
-      }
+      },
+      complete: () => {
+        console.log('task complete');
+      },
     });
   }
 
   addTask(name: string, tasks: Task[]): void {
-    this.tasksService.add(name).then((response) => {
-      if ('id' in response) {
+    this.tasksService.add(name).subscribe({
+      next: (res) => {
         this.listState = {
           state: LIST_STATE_VALUE.SUCCESS,
-          results: tasks.concat(response),
+          results: tasks.concat(res),
         };
-      } else {
-        alert(response.message);
-      }
+      },
+      error: (err) => {
+        alert(err.message);
+      },
     });
   }
 }

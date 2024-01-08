@@ -39,20 +39,19 @@ export class TasksListComponent {
   private tasksService = inject(TasksService);
 
   delete(taskId: number) {
-    this.tasksService.delete(taskId).then((res) => {
-      if (res instanceof Error) {
-        alert(res.message);
-      } else {
+    this.tasksService.delete(taskId).subscribe({
+      next: (res) => {
         this.tasks = this.tasks.filter((task) => task.id !== taskId);
-      }
+      },
+      error: (err) => {
+        alert(err.message);
+      },
     });
   }
 
   updateTask(taskId: number, updatedTask: TaskUpdatePayload) {
-    this.tasksService.update(taskId, updatedTask).then((res) => {
-      if (res instanceof Error) {
-        alert(res.message);
-      } else {
+    this.tasksService.update(taskId, updatedTask).subscribe({
+      next: (res) => {
         this.tasks = this.tasks.map((task) => {
           if (task.id === res.id) {
             return res;
@@ -60,7 +59,10 @@ export class TasksListComponent {
             return task;
           }
         });
-      }
+      },
+      error: (err) => {
+        alert(err.message);
+      },
     });
   }
 }

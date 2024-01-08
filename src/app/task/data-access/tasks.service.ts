@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Task } from '../model/Task';
-import { ListFetchingError } from '../../utils/list-state.type';
-import { wait } from '../../utils/wait';
+import { HttpClient } from '@angular/common/http';
 
 export type TaskUpdatePayload = { done?: boolean; name?: string };
 
@@ -16,69 +15,30 @@ export type GetAllTasksSearchParams = {
   providedIn: 'root',
 })
 export class TasksService {
+  private http = inject(HttpClient);
   private URL = 'http://localhost:3000';
 
-  async getAll(searchParams: GetAllTasksSearchParams) {
-    await wait();
+  constructor() {}
 
-    const url = new URL('/tasks', this.URL);
-
-    url.search = new URLSearchParams(searchParams).toString();
-
-    return fetch(url).then<Task[] | ListFetchingError>((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return { status: response.status, message: response.statusText };
+  getAll(searchParams: GetAllTasksSearchParams) {
+    return this.http.get<Task[]>(`${this.URL}/tasks/`, {
+      observe: 'response',
+      params: searchParams,
     });
   }
 
-  async delete(taskId: number) {
-    return fetch(`${this.URL}/tasks/${taskId}`, {
-      method: 'DELETE',
-    }).then<Error | undefined>((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return new Error('Cant delete task');
-    });
+  delete(taskId: number) {
+    return this.http.delete<Task>(`${this.URL}/tasks/${taskId}`);
   }
 
-  async update(taskId: number, payload: TaskUpdatePayload) {
-    return fetch(`${this.URL}/tasks/${taskId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    }).then<Task | Error>((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return new Error('Cant update task');
-    });
+  update(taskId: number, payload: TaskUpdatePayload) {
+    return this.http.patch<Task>(`${this.URL}/tasks/${taskId}`, payload);
   }
 
-  async add(name: string) {
-    await wait();
-
-    return fetch(`${this.URL}/tasks`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-      } as Task),
-    }).then<Task | Error>((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return new Error('Cant add task');
+  add(name: string) {
+    return this.http.post<Task>(`${this.URL}/tasks`, {
+      name,
+      done: false,
     });
   }
 }
