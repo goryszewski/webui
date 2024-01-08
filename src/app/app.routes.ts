@@ -17,6 +17,13 @@ export const routes: Routes = [
     path: 'tasks',
     children: [
       { path: '', component: TaskListPageComponent },
+      {
+        path: 'urgent',
+        component: TaskListPageComponent,
+        data: {
+          urgent: true,
+        },
+      },
       { path: ':projectId', component: TaskListPageComponent },
     ],
   },

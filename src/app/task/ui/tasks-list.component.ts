@@ -29,7 +29,7 @@ import { TaskCardComponent } from './task-card.component';
           />
         </li>
       } @empty {
-        <p>Nie ma taskow></p>
+        <p>Nie ma taskow</p>
       }
     </ul>
   `,

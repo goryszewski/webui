@@ -9,6 +9,7 @@ export type GetAllTasksSearchParams = {
   _sort: 'createdAt';
   _order: 'desc' | 'asc';
   done_like: 'true' | 'false' | '';
+  urgent_like: 'true' | '';
 };
 
 @Injectable({

@@ -32,9 +32,20 @@ import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-ic
             <span [class.line-through]="task.done">{{ task.name }} </span>
           }
         </section>
-        <footer class=" pt-2 flex items-center justify-end">
-          <span class="text-xs pr-1">{{ task.createdAt | customeDatePipe }} </span>
-          <ng-icon name="featherCalendar" class="text-sm" />
+        <footer class=" pt-2 flex justify-between">
+          <button
+            class="flex items-center"
+            (click)="updateTaskUrgentStatus(); $event.stopPropagation()"
+          >
+            <ng-icon
+              [name]="task.urgent ? 'bootstrapBookmarkFill' : 'bootstrapBookmark'"
+              class="text-sm"
+            />
+          </button>
+          <div class="flex items-center justify-end">
+            <span class="text-xs pr-1">{{ task.createdAt | customeDatePipe }} </span>
+            <ng-icon name="featherCalendar" class="text-sm" />
+          </div>
         </footer>
       </button>
     </div>
@@ -48,6 +59,9 @@ import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-ic
   ],
 })
 export class TaskCardComponent {
+  updateTaskUrgentStatus() {
+    throw new Error('Method not implemented.');
+  }
   // INPUT OUTPUT
   @Input({ required: true }) task!: Task;
   @Output() update = new EventEmitter<TaskUpdatePayload>();
