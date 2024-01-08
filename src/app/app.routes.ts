@@ -13,7 +13,13 @@ export const routes: Routes = [
     path: 'projects',
     component: ProjectListPageComponent,
   },
-  { path: 'tasks', component: TaskListPageComponent },
+  {
+    path: 'tasks',
+    children: [
+      { path: '', component: TaskListPageComponent },
+      { path: ':projectId', component: TaskListPageComponent },
+    ],
+  },
   {
     path: '**',
     component: E404Component,

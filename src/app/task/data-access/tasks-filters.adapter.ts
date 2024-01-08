@@ -3,7 +3,7 @@ import { TasksListFiltersFormValue } from '../ui/task-list-filters.component';
 import { GetAllTasksSearchParams } from './tasks.service';
 
 export function getAllTasksSearchParams(
-  formValue: TasksListFiltersFormValue
+  formValue: TasksListFiltersFormValue,
 ): GetAllTasksSearchParams {
   let searchParams = {
     _sort: 'createdAt',

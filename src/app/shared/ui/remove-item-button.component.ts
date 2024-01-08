@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   featherTrash2,
@@ -11,7 +10,7 @@ import {
 @Component({
   selector: 'app-remove-item-button',
   standalone: true,
-  imports: [NgIf, NgIconComponent],
+  imports: [NgIconComponent],
   viewProviders: [provideIcons({ featherTrash2, featherUser, featherCheck, featherX })],
   template: `
     <div
@@ -25,29 +24,28 @@ import {
         [class.invisible]="!removeMode"
         [class.-translate-x-6]="removeMode"
         [class.bg-red-700]="removeMode"
-        >Are you sure?</span
-      >
-      <button
-        *ngIf="!removeMode"
-        (click)="removeMode = true; $event.stopPropagation()"
-        class="flex hover:bg-white hover:rounded-full"
-      >
-        <ng-icon name="featherTrash2" class="icon--hover" />
-      </button>
-      <button
-        *ngIf="removeMode"
-        (click)="removeMode = false; $event.stopPropagation()"
-        class="flex mr-1"
-      >
-        <ng-icon name="featherX" class="hover:bg-white icon--hover" />
-      </button>
-      <button
-        *ngIf="removeMode"
-        (click)="confirm.emit(); removeMode = false; $event.stopPropagation()"
-        class="flex pr-2"
-      >
-        <ng-icon name="featherCheck" class="hover:bg-white icon--hover" />
-      </button>
+        >Are you sure?
+      </span>
+      @if (!removeMode; as tt) {
+        <!-- {{ tt }} -->
+        <button
+          (click)="removeMode = true; $event.stopPropagation()"
+          class="flex hover:bg-white hover:rounded-full"
+        >
+          <ng-icon name="featherTrash2" class="icon--hover" />
+        </button>
+      } @else {
+        <!-- @else if (){} -->
+        <button (click)="removeMode = false; $event.stopPropagation()" class="flex mr-1">
+          <ng-icon name="featherX" class="hover:bg-white icon--hover" />
+        </button>
+        <button
+          (click)="confirm.emit(); removeMode = false; $event.stopPropagation()"
+          class="flex pr-2"
+        >
+          <ng-icon name="featherCheck" class="hover:bg-white icon--hover" />
+        </button>
+      }
     </div>
   `,
   styles: [

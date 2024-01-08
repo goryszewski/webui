@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@ng-icons/bootstrap-icons": "^26.2.0",
     "@ng-icons/core": "^26.3.0",
     "@ng-icons/feather-icons": "^26.3.0",
     "rxjs": "~7.8.0",
@@ -31,6 +32,7 @@
     "autoprefixer": "^10.4.16",
     "json-server": "^0.17.4",
     "postcss": "^8.4.32",
+    "prettier": "^3.1.0",
     "tailwindcss": "^3.4.0",
     "typescript": "~5.2.2"
   }

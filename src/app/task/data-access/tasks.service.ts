@@ -19,7 +19,12 @@ export class TasksService {
   private URL = 'http://localhost:3000';
 
   constructor() {}
-
+  getAllByProjectId(projectId: number, searchParams: GetAllTasksSearchParams) {
+    return this.http.get<Task[]>(`${this.URL}/tasks`, {
+      observe: 'response',
+      params: { ...searchParams, projectId },
+    });
+  }
   getAll(searchParams: GetAllTasksSearchParams) {
     return this.http.get<Task[]>(`${this.URL}/tasks/`, {
       observe: 'response',
