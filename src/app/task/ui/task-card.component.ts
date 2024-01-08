@@ -5,6 +5,8 @@ import { RemoveItemButtonComponent } from '../../shared/ui/remove-item-button.co
 import { AutosizeTextareaComponent } from '../../shared/ui/autosize-textarea.component';
 import { NgIf } from '@angular/common';
 import { TaskUpdatePayload } from '../data-access/tasks.service';
+import { CustomDatePipe } from '../../utils/pipes/CustomDatePipe';
+
 @Component({
   selector: 'app-task-card',
   standalone: true,
@@ -16,8 +18,6 @@ import { TaskUpdatePayload } from '../data-access/tasks.service';
         (dblclick)="switchToEditMode()"
       >
         <header class="flex justify-end">
-          <!-- <app-remove-item-button (confirm)="delete.emit()" /> -->
-
           <app-remove-item-button (confirm)="remove(task)" />
         </header>
         <section class="text-left">
@@ -28,17 +28,24 @@ import { TaskUpdatePayload } from '../data-access/tasks.service';
             [value]="task.name"
           />
           <ng-template #previewModeTemplate>
-            <span [class.line-through]="task.done"> f {{ task.name }} </span>
+            <span [class.line-through]="task.done">{{ task.name }} </span>
           </ng-template>
         </section>
         <footer class=" pt-2 flex items-center justify-end">
+          <span class="text-xs pr-1">{{ task.createdAt | customeDatePipe }} </span>
           <ng-icon name="featherCalendar" class="text-sm" />
         </footer>
       </button>
     </div>
   `,
   styles: ``,
-  imports: [NgIf, NgIconComponent, RemoveItemButtonComponent, AutosizeTextareaComponent],
+  imports: [
+    NgIf,
+    NgIconComponent,
+    CustomDatePipe,
+    RemoveItemButtonComponent,
+    AutosizeTextareaComponent,
+  ],
 })
 export class TaskCardComponent {
   // INPUT OUTPUT
@@ -51,6 +58,10 @@ export class TaskCardComponent {
   editMode: boolean = false;
 
   // methods
+  formatDate() {
+    // return new Date(this.task.createdAt);
+    return Intl.DateTimeFormat('pl').format(this.task.createdAt);
+  }
 
   switchToEditMode() {
     this.isSingleClick = false;
@@ -58,8 +69,12 @@ export class TaskCardComponent {
   }
 
   handleSingleClick() {
-    console.log('002');
     this.isSingleClick = true;
+    setTimeout(() => {
+      if (this.isSingleClick) {
+        this.update.emit({ done: !this.task.done });
+      }
+    });
   }
 
   updateTaskName(updateName: string) {
