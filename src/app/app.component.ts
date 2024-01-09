@@ -28,6 +28,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/rou
           >
         </li>
         <li><a routerLink="/projects" routerLinkActive="font-bold">Projects (0)</a></li>
+        <li>
+          <a routerLink="/images" routerLinkActive="font-bold">images (0)</a>
+        </li>
         <li class="ml-auto">
           <a routerLink="/tasks/urgent" routerLinkActive="font-bold">Ważne (0)</a>
         </li>
