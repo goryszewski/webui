@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Mtask } from '../model/Mtask';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-icons';
@@ -10,7 +10,7 @@ import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-ic
   viewProviders: [provideIcons({ bootstrapBookmarkFill, bootstrapBookmark })],
   template: `
     <div class="rounded-md shadow-md p-4 block">
-      <button class="w-full">
+      <button class="w-full" (click)="delete()">
         <header class="flex justify-end">remove</header>
         <section class="text-left">
           @if (editMode) {
@@ -26,7 +26,7 @@ import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-ic
             <ng-icon class="text-sm" />
           </button>
           <div class="flex items-center justify-end">
-            <span class="text-xs pr-1">{{ mtask.autor }} </span>
+            <span class="text-xs pr-1">{{ mtask.autor }} {{ mtask.createdAt }} </span>
             <ng-icon name="featherCalendar" class="text-sm" />
           </div>
         </footer>
@@ -37,5 +37,11 @@ import { bootstrapBookmark, bootstrapBookmarkFill } from '@ng-icons/bootstrap-ic
 })
 export class MtaskCardComponent {
   @Input({ required: true }) mtask!: Mtask;
+  @Output() deleteMtASK = new EventEmitter<void>();
   editMode: boolean = false;
+
+  delete() {
+    console.log('delete');
+    this.deleteMtASK.emit();
+  }
 }
