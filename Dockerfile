@@ -11,9 +11,9 @@ RUN npm install
 
 COPY . .
 
-RUN ng build
+RUN ng build --configuration=production
 
-FROM nginx 
+FROM nginx
 
 COPY --from=builder /build/dist/webui/browser /usr/share/nginx/html
 

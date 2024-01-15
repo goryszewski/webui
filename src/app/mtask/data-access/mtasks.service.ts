@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Mtask } from '../model/Mtask';
 import { MTasksListFiltersFormValue } from '../ui/mtask-add.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MtaskService {
   private http = inject(HttpClient);
-  private URL = 'http://localhost:5000';
+  private URL = environment.link;
 
   getAll() {
     return this.http.get<Mtask[]>(`${this.URL}/api/tasks`, {
