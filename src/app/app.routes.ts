@@ -5,6 +5,8 @@ import { E404Component } from './e404.component';
 import { ImageListPageComponent } from './image/image-list-page.component';
 import { MtaskListPageComponent } from './mtask/mtask-list-page.component';
 
+import { VirtualMachineListPageComponent } from './vm/vm-list-page.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -14,6 +16,10 @@ export const routes: Routes = [
   {
     path: 'projects',
     component: ProjectListPageComponent,
+  },
+  {
+    path: 'vm',
+    component: VirtualMachineListPageComponent,
   },
   {
     path: 'images',

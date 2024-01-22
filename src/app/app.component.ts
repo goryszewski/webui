@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { TaskListPageComponent } from './task/task-list-page.component';
 import { ProjectListPageComponent } from './project/project-list-page.component';
-import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +33,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/rou
         </li>
         <li>
           <a routerLink="/mtasks" routerLinkActive="font-bold">mtasks (0)</a>
+        </li>
+        <li>
+          <a routerLink="/vm" routerLinkActive="font-bold">vm (0)</a>
         </li>
         <li class="ml-auto">
           <a routerLink="/tasks/urgent" routerLinkActive="font-bold">Ważne (0)</a>
